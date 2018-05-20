@@ -21,6 +21,7 @@ public:
     
     void update(float dt){
         box2d.update();
+        circle.update();
     }
     
     void draw(ofCamera& cam, bool frag){
@@ -28,9 +29,21 @@ public:
         circle.draw();
     }
 
+    void setParam(int ch, float val){
+        if(ch == 1){
+            // this case, do not use val
+            ofVec2f velocity = ofVec2f(ofRandom(-1.0, 1.0), ofRandom(-1.0, 1.0)).normalize();
+            circle.addForce(velocity, 5000.0);
+        }
+
+    };
+    
+    
 private:
     ofxBox2d box2d;
     CustomCircle circle;
+    
+    
 
 };
 

@@ -1,8 +1,12 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxOsc.h"
 #include "ObjBase.h"
 #include "PhysicalObjs.h"
+
+#define PORT 60000
+#define NUM_MSG_STRINGS 20
 
 class ofApp : public ofBaseApp{
 
@@ -28,5 +32,8 @@ private:
     
     ofParameter<float> dt;
     ofEasyCam cam;
+    
+    ofxOscReceiver receiver;
+    string instlMsg;
     
 };
