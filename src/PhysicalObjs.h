@@ -5,6 +5,7 @@
 #include "ObjBase.h"
 #include "ofxBox2d.h"
 #include "CustomCircle.h"
+#include "CustomRect.h"
 
 class PhysicalObjs : public ObjBase {
 public:
@@ -17,16 +18,21 @@ public:
     
         circle.setPhysics(3.0, 0.53, 0.1);
         circle.setup(box2d.getWorld(), ofGetWidth() / 2.0, 100, 40);
+        
+        rect.setPhysics(3.0, 0.53, 0.1);
+        rect.setup(box2d.getWorld(), ofGetWidth() / 2.0, 100, 80, 80);
     }
     
     void update(float dt){
         box2d.update();
         circle.update();
+        rect.update();
     }
     
     void draw(ofCamera& cam, bool frag){
         ofSetColor(0, 127, 255);
         circle.draw();
+        rect.draw();
     }
 
     void setParam(int ch, float val){
@@ -42,6 +48,7 @@ public:
 private:
     ofxBox2d box2d;
     CustomCircle circle;
+    CustomRect rect;
     
     
 

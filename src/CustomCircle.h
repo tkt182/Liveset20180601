@@ -13,11 +13,14 @@ public:
         glTranslatef(getPosition().x, getPosition().y, 0);
         ofFill();
         ofSetColor(31,127,255,100);
-        ofCircle(0, 0, radius);
+        ofDrawCircle(0, 0, radius);
         ofSetColor(31,127,255,200);
-        ofCircle(0, 0, radius*0.7);
+        ofDrawCircle(0, 0, radius*0.3);
         glPopMatrix();
     }
+
+
+
 };
 
 #endif /* CustomCircle_h */
