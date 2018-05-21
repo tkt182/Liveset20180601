@@ -6,6 +6,7 @@
 #include "ofxBox2d.h"
 #include "CustomCircle.h"
 #include "CustomRect.h"
+#include "ConnectLines.h"
 
 class PhysicalObjs : public ObjBase {
 public:
@@ -21,18 +22,29 @@ public:
         
         rect.setPhysics(3.0, 0.53, 0.1);
         rect.setup(box2d.getWorld(), ofGetWidth() / 2.0, 100, 80, 80);
+        
+        lines.setup();
     }
     
     void update(float dt){
         box2d.update();
         circle.update();
         rect.update();
+        
+        points.clear();
+        points.push_back(circle.getPosition());
+        points.push_back(rect.getPosition());
+        
+        lines.update(points);
+        
     }
     
     void draw(ofCamera& cam, bool frag){
         ofSetColor(0, 127, 255);
         circle.draw();
         rect.draw();
+        
+        lines.draw();
     }
 
     void setParam(int ch, float val){
@@ -49,9 +61,10 @@ private:
     ofxBox2d box2d;
     CustomCircle circle;
     CustomRect rect;
+    ConnectLine lines;
     
+    vector<ofVec2f> points;
     
-
 };
 
 
