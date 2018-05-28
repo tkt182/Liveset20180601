@@ -27,7 +27,7 @@ public:
     
     void update(float dt){
         for (int i = this->circles.size() - 1; i > -1; i--) {
-            this->circles_life[i] -= 3.5;
+            this->circles_life[i] -= 16.0;
             
             if (this->circles_life[i] < 0) {
                 this->circles[i].get()->destroy();

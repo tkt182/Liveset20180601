@@ -13,6 +13,10 @@ void ofApp::setup(){
     shared_ptr<ObjBase> o0(new Fireworks());
     o0->setup();
     objs.push_back(o0);
+    
+    shared_ptr<ObjBase> o1(new Particles());
+    o1->setup();
+    objs.push_back(o1);
 }
 
 //--------------------------------------------------------------
