@@ -80,7 +80,7 @@ public:
             float radius = 10;
             float c_x = ofRandom(ofGetWidth()*1.0/3.0, ofGetWidth()*3.0/4.0);
             float c_y = ofRandom(ofGetHeight()*1.0/3.0, ofGetHeight()*3.0/4.0);
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 3; i++) {
                 float color_value = ofRandom(256);
 
                 for (int deg = 0; deg < 360; deg += 10) {

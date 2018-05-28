@@ -200,7 +200,7 @@ public:
             this->particles[i]->draw();
             for (int j = i; j < this->particles.size(); j++) {
                 distance = this->particles[i]->get_location().distance(this->particles[j]->get_location());
-                if (this->lineEnable && distance < 100) {
+                if (this->lineEnable && distance < 70) {
                     ofDrawLine(this->particles[i]->get_location(), this->particles[j]->get_location());
                 }
             }

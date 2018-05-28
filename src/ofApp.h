@@ -4,6 +4,7 @@
 #include "Fireworks.h"
 #include "Particles.h"
 #include "ofxOsc.h"
+#include "ofxPostGlitch.h"
 
 #define PORT 60000
 
@@ -34,5 +35,10 @@ private:
     
     ofxOscReceiver receiver;
     string instlMsg;
+    
+    ofFbo          finalFbo;
+    ofxPostGlitch  myGlitch;
+    bool toggleGlitch;
+    int frameCounter;
 
 };

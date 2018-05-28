@@ -3,13 +3,20 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ADD);
+    finalFbo.allocate(ofGetWidth(), ofGetHeight());
+    myGlitch.setup(&finalFbo);
+    myGlitch.toggleFx(OFXPOSTGLITCH_GLOW);
+    toggleGlitch = false;
+    frameCounter = 0;
+    
     ofSetFrameRate(30);
     ofBackground(0);
     //ofSetWindowTitle("Insta");
     //ofBackground(0);
     
     receiver.setup(PORT);
-    ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ADD);
+    //ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ADD);
     
     
     shared_ptr<ObjBase> o0(new Fireworks());
@@ -43,21 +50,47 @@ void ofApp::update(){
                 if(instlMsg == "808bd"){
                     objs[1]->setParam(2, 1);
                 }
+                if(instlMsg == "glitch"){
+                    if(!toggleGlitch) {
+                        toggleGlitch = true;
+                        myGlitch.setFx(OFXPOSTGLITCH_CUTSLIDER, true);
+                    }
+                }
             }
         }
     }
     
     for(int i = 0; i < objs.size(); i++){
         objs[i]->update(dt.get());
+        if(toggleGlitch){
+            frameCounter++;
+            if(frameCounter > 10){
+                toggleGlitch = false;
+                myGlitch.setFx(OFXPOSTGLITCH_CUTSLIDER, false);
+                frameCounter = 0;
+            }
+        }
+        
     }
     
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    finalFbo.begin();
+    ofClear(0, 0, 0);
+    
     for(int i = 0; i < objs.size(); i++){
         objs[i]->draw(true);
     }
+    finalFbo.end();
+    
+    /* Apply effects */
+    myGlitch.generateFx();
+    
+    /* draw effected view */
+    finalFbo.draw(0, 0);
 }
 
 //--------------------------------------------------------------
@@ -72,6 +105,18 @@ void ofApp::keyPressed(int key){
     if(key == 'd'){
         objs[2]->setParam(3, 1);
     }
+    if (key == 'q') myGlitch.toggleFx(OFXPOSTGLITCH_CONVERGENCE);
+    //if (key == 'w') myGlitch.toggleFx(OFXPOSTGLITCH_GLOW);
+    if (key == 'e') myGlitch.toggleFx(OFXPOSTGLITCH_SHAKER);
+    if (key == 'r') myGlitch.toggleFx(OFXPOSTGLITCH_CUTSLIDER);
+    if (key == 't') myGlitch.toggleFx(OFXPOSTGLITCH_TWIST);
+    if (key == 'y') myGlitch.toggleFx(OFXPOSTGLITCH_OUTLINE);
+    if (key == 'u') myGlitch.toggleFx(OFXPOSTGLITCH_NOISE);
+    if (key == 'i') myGlitch.toggleFx(OFXPOSTGLITCH_SLITSCAN);
+    if (key == 'o') myGlitch.toggleFx(OFXPOSTGLITCH_SWELL);
+    //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_INVERT);
+    //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_CR_RLINE);
+    if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_CR_MIRROR4);
 }
 
 //--------------------------------------------------------------
