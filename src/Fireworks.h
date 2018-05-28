@@ -14,7 +14,7 @@ public:
         ofSetWindowTitle("Insta");
         */
          
-        ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ADD);
+        //ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ADD);
         
         this->box2d.init();
         this->box2d.setGravity(0, 15);
@@ -67,6 +67,7 @@ public:
         }
         
         this->fbo.end();
+
     }
     
     void draw(bool isShow){
@@ -74,7 +75,7 @@ public:
     }
     
     void setParam(int ch, float val){
-        cout << ch << endl;
+        //cout << ch << endl;
         if(ch == 1){
             float radius = 10;
             float c_x = ofRandom(ofGetWidth()*1.0/3.0, ofGetWidth()*3.0/4.0);

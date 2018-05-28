@@ -5,6 +5,8 @@
 #include "Particles.h"
 #include "ofxOsc.h"
 
+#define PORT 60000
+
 class ofApp : public ofBaseApp{
 
 public:

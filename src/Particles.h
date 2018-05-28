@@ -21,7 +21,8 @@ public:
         this->alpha -= 3;
     }
     void draw(){
-        ofSetColor(this->body_color, this->alpha);
+        //ofSetColor(this->body_color, this->alpha);
+        ofSetColor(this->body_color, 255);
         ofDrawEllipse(this->location, this->body_size, this->body_size);
     }
     
@@ -151,6 +152,7 @@ public:
             this->cleators.push_back(new Cleator());
         }
         */
+        this->lineEnable = 1;
     }
     
     void update(float dt){
@@ -190,29 +192,28 @@ public:
     
     void draw(bool isShow){
         
+        ofPushMatrix();
         ofTranslate(ofGetWidth() / 2, ofGetHeight() / 2);
-        
         float distance;
         for (int i = 0; i < this->particles.size(); i++) {
             this->particles[i]->draw();
             for (int j = i; j < this->particles.size(); j++) {
                 distance = this->particles[i]->get_location().distance(this->particles[j]->get_location());
-                if (distance < 100) {
+                if (this->lineEnable && distance < 100) {
                     ofDrawLine(this->particles[i]->get_location(), this->particles[j]->get_location());
                 }
             }
         }
-        
-        /*
-        for (int i = 0; i < this->cleators.size(); i++) {
-            this->cleators[i]->draw();
-        }
-        */
-        
+        ofPopMatrix();
     }
     
     void setParam(int ch, float val){
         if(ch == 2){
+            this->cleators.push_back(new Cleator());
+            this->cleators_life.push_back(255);
+        }
+        if(ch == 3){
+            this->lineEnable = 0;
             this->cleators.push_back(new Cleator());
             this->cleators_life.push_back(255);
         }
@@ -222,7 +223,7 @@ private:
     vector<Particle*> particles;
     vector<Cleator*> cleators;
     vector<float> cleators_life;
-    
+    int lineEnable;
 };
 
 #endif /* Particles_h */
