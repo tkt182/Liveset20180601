@@ -9,7 +9,7 @@ public:
         this->location = location;
         this->velocity = velocity * 2.0;
         this->alpha = 255;
-        this->body_size = velocity.length();
+        this->body_size = velocity.length() * 0.5;
         this->body_color.setHsb(ofRandom(255), 255, 255);
     }
     ~Particle(){

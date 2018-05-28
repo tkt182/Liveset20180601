@@ -91,7 +91,7 @@ public:
                     this->circles.back().get()->setPhysics(3.0, 0.5, 0.1);
                     this->circles.back().get()->setup(this->box2d.getWorld(), c_x + tmp_x, c_y + tmp_y, 4);
                     
-                    this->circles.back().get()->addForce(ofVec2f(tmp_x, tmp_y), 6.0);
+                    this->circles.back().get()->addForce(ofVec2f(-tmp_x, tmp_y), 10.0);
                     
                     ofColor circle_color;
                     circle_color.setHsb(color_value, 255, 255);
