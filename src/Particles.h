@@ -47,7 +47,8 @@ class Cleator
 public:
     Cleator(){
         this->location = ofVec2f(ofRandom(-1, 1), ofRandom(-1, 1));
-        this->velocity = ofVec2f(0, 0);
+        //this->velocity = ofVec2f(0, 0);
+        this->velocity = ofVec2f(ofRandom(-10, 10), ofRandom(-10, 10));
         this->acceleration = ofVec2f(0, 0);
         
         this->max_speed = 10;
@@ -171,8 +172,8 @@ public:
             ofVec2f location = this->cleators[i]->get_location();
             ofVec2f velocity = this->cleators[i]->get_velocity();
             
-            if (velocity.length() > 5) {
-                this->particles.push_back(new Particle(location, velocity * 0.3));
+            if (velocity.length() > 0.1) {
+                this->particles.push_back(new Particle(location, velocity));
             }
         }
         

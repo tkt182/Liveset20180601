@@ -41,20 +41,10 @@ void ofApp::update(){
                     objs[0]->setParam(1, 1);
                 }
                 if(instlMsg == "808bd"){
-                    objs[0]->setParam(2, 1);
+                    objs[1]->setParam(2, 1);
                 }
             }
         }
-        
-        /*
-         if(m.getAddress() == "/sound/instl"){
-         instlMsg = m.getArgAsString(0);
-         
-         if(instlMsg == "hh"){
-         objs[0]->setParam(1, ofRandom(-1.0, 1.0));
-         }
-         }
-         */
     }
     
     for(int i = 0; i < objs.size(); i++){
