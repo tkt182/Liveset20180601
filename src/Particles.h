@@ -146,12 +146,24 @@ private:
 class Particles : public ObjBase {
 public:
     void setup(){
+        /*
         for (int i = 0; i < 2; i++) {
             this->cleators.push_back(new Cleator());
         }
+        */
     }
     
     void update(float dt){
+        for(int i = this->cleators_life.size() - 1; i > -1; i--){
+            this->cleators_life[i] -= 16.0;
+        
+            if(this->cleators_life[i] < 0){
+                this->cleators.erase(this->cleators.begin() + i);
+                this->cleators_life.erase(this->cleators_life.begin() + i);
+            }
+        
+        }
+        
         for (int i = 0; i < this->cleators.size(); i++) {
             
             ofVec2f location = this->cleators[i]->get_location();
@@ -200,13 +212,16 @@ public:
     }
     
     void setParam(int ch, float val){
-        
+        if(ch == 2){
+            this->cleators.push_back(new Cleator());
+            this->cleators_life.push_back(255);
+        }
     }
     
 private:
     vector<Particle*> particles;
     vector<Cleator*> cleators;
-    vector<float> particles_life;
+    vector<float> cleators_life;
     
 };
 
