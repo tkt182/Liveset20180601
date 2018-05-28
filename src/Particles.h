@@ -7,7 +7,7 @@ public:
     Particle() : Particle(ofVec2f(0, 0), ofVec2f(0, 0)) { }
     Particle(ofVec2f location, ofVec2f velocity){
         this->location = location;
-        this->velocity = velocity;
+        this->velocity = velocity * 2.0;
         this->alpha = 255;
         this->body_size = velocity.length();
         this->body_color.setHsb(ofRandom(255), 255, 255);
@@ -173,7 +173,7 @@ public:
             ofVec2f velocity = this->cleators[i]->get_velocity();
             
             if (velocity.length() > 0.1) {
-                this->particles.push_back(new Particle(location, velocity));
+                this->particles.push_back(new Particle(location, velocity ));
             }
         }
         

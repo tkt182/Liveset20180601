@@ -272,6 +272,7 @@
 		F855C3BF20BB2DFE0044D165 /* ObjBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjBase.h; sourceTree = "<group>"; };
 		F855C3C020BB2EA10044D165 /* Fireworks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fireworks.h; sourceTree = "<group>"; };
 		F855C3C120BB81A10044D165 /* Particles.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Particles.h; sourceTree = "<group>"; };
+		F879B6BC20BC2D1600976B66 /* Lines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lines.h; sourceTree = "<group>"; };
 		FA784162B6A8E3A77BBE4D6C /* b2TimeStep.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2TimeStep.h; path = ../../../addons/ofxBox2d/libs/Box2D/Dynamics/b2TimeStep.h; sourceTree = SOURCE_ROOT; };
 		FD20B1FFE795860DB1C68BF2 /* b2ChainAndCircleContact.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2ChainAndCircleContact.cpp; path = ../../../addons/ofxBox2d/libs/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -618,6 +619,7 @@
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				F855C3C020BB2EA10044D165 /* Fireworks.h */,
 				F855C3C120BB81A10044D165 /* Particles.h */,
+				F879B6BC20BC2D1600976B66 /* Lines.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

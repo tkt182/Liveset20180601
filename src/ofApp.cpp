@@ -27,7 +27,7 @@ void ofApp::setup(){
     o1->setup();
     objs.push_back(o1);
     
-    shared_ptr<ObjBase> o2(new Particles());
+    shared_ptr<ObjBase> o2(new Lines());
     o2->setup();
     objs.push_back(o2);
 }
@@ -49,6 +49,9 @@ void ofApp::update(){
                 }
                 if(instlMsg == "808bd"){
                     objs[1]->setParam(2, 1);
+                }
+                if(instlMsg == "hh"){
+                    objs[2]->setParam(4, 1);
                 }
                 if(instlMsg == "glitch"){
                     if(!toggleGlitch) {
@@ -103,7 +106,7 @@ void ofApp::keyPressed(int key){
         objs[1]->setParam(2, 1);
     }
     if(key == 'd'){
-        objs[2]->setParam(3, 1);
+        objs[2]->setParam(4, 1);
     }
     if (key == 'q') myGlitch.toggleFx(OFXPOSTGLITCH_CONVERGENCE);
     //if (key == 'w') myGlitch.toggleFx(OFXPOSTGLITCH_GLOW);

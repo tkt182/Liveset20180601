@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Fireworks.h"
 #include "Particles.h"
+#include "Lines.h"
 #include "ofxOsc.h"
 #include "ofxPostGlitch.h"
 
