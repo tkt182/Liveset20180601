@@ -4,6 +4,7 @@
 #include "Fireworks.h"
 #include "Particles.h"
 #include "Lines.h"
+#include "VectorField.h"
 #include "ofxOsc.h"
 #include "ofxPostGlitch.h"
 

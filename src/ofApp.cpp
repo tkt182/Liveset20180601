@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    //ofHideCursor();
     ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ADD);
     finalFbo.allocate(ofGetWidth(), ofGetHeight());
     myGlitch.setup(&finalFbo);
@@ -30,6 +31,10 @@ void ofApp::setup(){
     shared_ptr<ObjBase> o2(new Lines());
     o2->setup();
     objs.push_back(o2);
+    
+    shared_ptr<ObjBase> o3(new VectorField());
+    o3->setup();
+    objs.push_back(o3);
 }
 
 //--------------------------------------------------------------
@@ -53,10 +58,14 @@ void ofApp::update(){
                 if(instlMsg == "hh"){
                     objs[2]->setParam(4, 1);
                 }
+                if(instlMsg == "jazz"){
+                    objs[2]->setParam(5, 1);
+                }
                 if(instlMsg == "glitch"){
                     if(!toggleGlitch) {
                         toggleGlitch = true;
-                        myGlitch.setFx(OFXPOSTGLITCH_CUTSLIDER, true);
+                        //myGlitch.setFx(OFXPOSTGLITCH_CUTSLIDER, true);
+                        myGlitch.setFx(OFXPOSTGLITCH_TWIST, true);
                     }
                 }
             }
@@ -69,7 +78,8 @@ void ofApp::update(){
             frameCounter++;
             if(frameCounter > 10){
                 toggleGlitch = false;
-                myGlitch.setFx(OFXPOSTGLITCH_CUTSLIDER, false);
+                //myGlitch.setFx(OFXPOSTGLITCH_CUTSLIDER, false);
+                myGlitch.setFx(OFXPOSTGLITCH_TWIST, false);
                 frameCounter = 0;
             }
         }
@@ -87,6 +97,7 @@ void ofApp::draw(){
     for(int i = 0; i < objs.size(); i++){
         objs[i]->draw(true);
     }
+    objs[3]->draw(true);
     finalFbo.end();
     
     /* Apply effects */
@@ -108,6 +119,10 @@ void ofApp::keyPressed(int key){
     if(key == 'd'){
         objs[2]->setParam(4, 1);
     }
+    if(key == 'f'){
+        objs[2]->setParam(5, 1);
+    }
+    
     if (key == 'q') myGlitch.toggleFx(OFXPOSTGLITCH_CONVERGENCE);
     //if (key == 'w') myGlitch.toggleFx(OFXPOSTGLITCH_GLOW);
     if (key == 'e') myGlitch.toggleFx(OFXPOSTGLITCH_SHAKER);
