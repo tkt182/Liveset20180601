@@ -14,7 +14,7 @@ public:
         panel.add(center.set("center", ofVec2f(0,0), ofVec2f(-1,-1), ofVec2f(1,1)));
         panel.add(bSlow.setup(false));
         
-        numParticle = 512 * 512;
+        numParticle = 256 * 256;
         
         // load shader
         updatePos.load("shader/passthru.vert", "shader/posUpdate.frag");
@@ -54,7 +54,7 @@ public:
     void update(float dt){
         
         if (bSlow) speed = 0.005;
-        else speed = 0.03;
+        else speed = 0.2;
         
         // smoothly change variable
         m.set((tm - m) * speed + m);
@@ -93,16 +93,35 @@ public:
         
         updateRenderer.end();
         cam.end();
-        
-        panel.draw();
-        
-        if (bShowTex) {
-            posPingPong.src->draw(textureRes, 0);
-            posPingPong.dist->draw(textureRes, textureRes + 100);
-        }
-
-        
     }
+    
+    void setParam(int ch, float val){
+        if(ch == 6){
+            float coin = ofRandom(1.0);
+            if (coin < 0.2) {
+                toCenter = ofVec2f(ofRandom(-0.8, 0.8), ofRandom(-0.8, 0.8));
+                
+                tt = ofRandom(t.getMin(), t.getMax());
+                tm = ofRandom(m.getMin(), 0.05);
+                tw = ofRandom(w.getMin(), w.getMax());
+                //tt = ofRandom(0.0, 1.0);
+                //tm = ofRandom(, 0.05);
+                //tw = ofRandom(0.0, 1.0);
+                
+            } else {
+                toCenter = ofVec2f(ofRandom(-0.8, 0.8), ofRandom(-0.8, 0.8));
+                
+                tt = ofRandom(t.getMin(), t.getMax());
+                tm = ofRandom(m.getMin(), m.getMax());
+                tw = ofRandom(w.getMin(), w.getMax());
+                //tt = ofRandom(0.0, 1.0);
+                tm = ofRandom(-0.09, 0.09);
+                //tw = ofRandom(0.0, 1.0);
+                
+            }
+        }
+    }
+    
     
 private:
     

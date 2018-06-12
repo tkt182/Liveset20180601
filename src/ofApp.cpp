@@ -83,7 +83,6 @@ void ofApp::update(){
                 frameCounter = 0;
             }
         }
-        
     }
     
 }
@@ -122,6 +121,10 @@ void ofApp::keyPressed(int key){
     if(key == 'f'){
         objs[2]->setParam(5, 1);
     }
+    if(key == 'g'){
+        objs[3]->setParam(6, 1);
+    }
+    
     
     if (key == 'q') myGlitch.toggleFx(OFXPOSTGLITCH_CONVERGENCE);
     //if (key == 'w') myGlitch.toggleFx(OFXPOSTGLITCH_GLOW);

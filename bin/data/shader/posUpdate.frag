@@ -23,7 +23,9 @@ void main() {
     vec2 v;
     v.x = - (m / r2 + b) * (cp.x * cos(t) + cp.y * sin(t));
     v.y = - (m / r2 + b) * (cp.y * cos(t) - cp.x * sin(t));
-
+    //v.x = - (m / r2 + b*0.1) * (cp.x * cos(t) + cp.y * sin(t));
+    //v.y = - (m / r2 + b*0.1) * (cp.y * cos(t) - cp.x * sin(t));
+    
     pos = pos + v;
 
     gl_FragColor = vec4(pos * 0.5 + vec2(0.5), 0, 1.0);
