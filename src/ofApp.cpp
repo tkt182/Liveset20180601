@@ -35,6 +35,10 @@ void ofApp::setup(){
     shared_ptr<ObjBase> o3(new VectorField());
     o3->setup();
     objs.push_back(o3);
+    
+    shared_ptr<ObjBase> o4(new RectLines());
+    o4->setup();
+    objs.push_back(o4);
 }
 
 //--------------------------------------------------------------
@@ -62,11 +66,27 @@ void ofApp::update(){
                     objs[2]->setParam(5, 1);
                 }
                 if(instlMsg == "glitch"){
+                    /*
                     if(!toggleGlitch) {
                         toggleGlitch = true;
                         //myGlitch.setFx(OFXPOSTGLITCH_CUTSLIDER, true);
                         myGlitch.setFx(OFXPOSTGLITCH_TWIST, true);
                     }
+                    */
+                    string opt = m.getArgAsString(i+2);
+                    if(opt == "u" || opt == "i"){
+                        objs[4]->setParam(7, 1);
+                    }
+                }
+                if(instlMsg == "u"){
+                    objs[4]->setParam(7, 1);
+                }
+                if(instlMsg == "i"){
+                    objs[4]->setParam(7, 1);
+                }
+                
+                if(instlMsg == "808"){
+                    objs[3]->setParam(6, 1);
                 }
             }
         }
@@ -123,6 +143,9 @@ void ofApp::keyPressed(int key){
     }
     if(key == 'g'){
         objs[3]->setParam(6, 1);
+    }
+    if(key == 'h'){
+        objs[4]->setParam(7, 1);
     }
     
     

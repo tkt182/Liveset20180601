@@ -54,7 +54,7 @@ public:
     void update(float dt){
         
         if (bSlow) speed = 0.005;
-        else speed = 0.2;
+        else speed = 0.1;
         
         // smoothly change variable
         m.set((tm - m) * speed + m);

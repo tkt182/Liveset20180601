@@ -5,6 +5,7 @@
 #include "Particles.h"
 #include "Lines.h"
 #include "VectorField.h"
+#include "RectLines.h"
 #include "ofxOsc.h"
 #include "ofxPostGlitch.h"
 
