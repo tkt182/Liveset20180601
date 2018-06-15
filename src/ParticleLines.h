@@ -7,31 +7,81 @@ class ParticleLine {
 public:
     ParticleLine(){
         particleNum = 25;
-        center = ofPoint(ofRandom(-ofGetWidth()/2 * 0.9, ofGetWidth()/2 * 0.9), ofRandom(-ofGetHeight()/2 * 0.9, ofGetHeight()/2 * 0.9));
+        center = ofPoint(ofRandom(-ofGetWidth()/2 * 0.6, ofGetWidth()/2 * 0.6), ofRandom(-ofGetHeight()/2 * 0.6, ofGetHeight()/2 * 0.6));
         for(int i = 0; i < particleNum; i++){
-            //ofPoint point = ofPoint(ofRandom(center.x - ofGetWidth()/100, center.x + ofGetWidth()/8), ofRandom(center.y - ofGetHeight()/8, center.y + ofGetHeight()/8));
             ofPoint point = ofPoint(ofRandom(center.x - ofGetWidth()/20, center.x + ofGetWidth()/20), ofRandom(center.y - ofGetHeight()/20, center.y + ofGetHeight()/20));
-            particlePoints.push_back(point);
+            particlePoints.push_back(ofVec3f(point.x, point.y, 0.0));
             mesh.addVertex(ofVec3f(point.x, point.y, 0.0));
+        
+            velocity.push_back(ofVec2f(ofRandom(-1.0, 1.0), ofRandom(-1.0, 1.0)));
+        
         }
-        mesh.setMode(OF_PRIMITIVE_POINTS);
         life = 10;
+        vxRotate = ofRandom(-1.0, 1.0);
+        vyRotate = ofRandom(-1.0, 1.0);
+        vzRotate = ofRandom(-1.0, 1.0);
+        xRotate  = 0.0;
+        yRotate  = 0.0;
+        zRotate  = 0.0;
+        scale = ofRandom(1.0, 1.5);
     }
     ~ParticleLine(){
-        
     }
     
     void update(){
         life -= 0.5;
+        for(int i = 0; i < particleNum; i++){
+            particlePoints[i].x += velocity[i].x;
+            particlePoints[i].y += velocity[i].y;
+        }
     }
+    
     void draw(){
-        mesh.draw(OF_MESH_POINTS);
+        
+        ofSetColor(128, 155, 255, 128);
+        glLineWidth(3.0);
+        ofPushMatrix();
+        ofScale(scale,scale,scale);
+        ofRotateX(xRotate);
+        ofRotateY(yRotate);
+        ofRotateZ(zRotate);
+        
+        
+        for(int i = 0; i < particleNum - 2; i++){
+            ofVec3f p1 = particlePoints[i];
+            ofVec3f p2 = particlePoints[i + 1];
+            ofVec3f p3 = particlePoints[i + 2];
+            
+            float distance1 = p1.distance(p2);
+            float distance2 = p1.distance(p3);
+            //cout << distance << endl;
+            if(distance1 < 50.0 && distance2 < 50.0){
+                glBegin(GL_LINES);
+                glVertex3f(p1.x, p1.y, p1.z);
+                glVertex3f(p2.x, p2.y, p2.z);
+                glVertex3f(p2.x, p2.y, p2.z);
+                glVertex3f(p3.x, p3.y, p3.z);
+                glVertex3f(p3.x, p3.y, p3.z);
+                glVertex3f(p1.x, p1.y, p1.z);
+                glEnd();
+            }
+        }
+        
+        ofPopMatrix();
+        xRotate += vxRotate;
+        yRotate += vyRotate;
+        zRotate += vzRotate;
     }
     
     int particleNum;
     ofPoint center;
-    vector<ofPoint> particlePoints;
+    vector<ofVec3f> particlePoints;
+    vector<ofVec2f> velocity;
     float life;
+    
+    float scale, xRotate, yRotate, zRotate;
+    float vxRotate, vyRotate, vzRotate;
+    
     
     ofVboMesh mesh;
     
@@ -48,10 +98,7 @@ public:
             if(pls[i]->life < 0){
                 pls.erase(pls.begin() + i);
             }
-            
-            pls[i]->life -= 0.5;
         }
-        
         
         for(int i = 0; i < pls.size(); i++){
             pls[i]->update();
