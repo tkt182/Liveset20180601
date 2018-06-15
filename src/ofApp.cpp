@@ -9,7 +9,9 @@ void ofApp::setup(){
     myGlitch.setup(&finalFbo);
     myGlitch.toggleFx(OFXPOSTGLITCH_GLOW);
     toggleGlitch = false;
+    toggleNoise = false;
     frameCounter = 0;
+    frameCounter2 = 0;
     
     ofSetFrameRate(30);
     ofBackground(0);
@@ -60,9 +62,9 @@ void ofApp::update(){
         ofxOscMessage m;
         receiver.getNextMessage(m);
         
-        cout << m.getAddress() << endl;
+        //cout << m.getAddress() << endl;
         for(int i = 0; i < m.getNumArgs(); i++){
-            cout << m.getArgAsString(i) << endl;
+            //cout << m.getArgAsString(i) << endl;
             if(m.getArgType(i) == OFXOSC_TYPE_STRING){
                 string instlMsg = m.getArgAsString(i);
                 if(instlMsg == "hand"){
@@ -79,6 +81,16 @@ void ofApp::update(){
                     objs[6]->setParam(8, 1);
                 }
                 if(instlMsg == "glitch"){
+                    string opt = m.getArgAsString(i+2);
+                    if(opt == "u" || opt == "i"){
+                        objs[4]->setParam(7, 1);
+                    }
+                    float opt2 = m.getArgAsFloat(3);
+                    cout << "hoge : " << opt2 << endl;
+                    if(opt2 == 2.0 || opt2 == 6.0 || opt2 == 7.0){
+                        toggleNoise = true;
+                        myGlitch.setFx(OFXPOSTGLITCH_NOISE, true);
+                    }
                     /*
                     if(!toggleGlitch) {
                         toggleGlitch = true;
@@ -86,9 +98,13 @@ void ofApp::update(){
                         myGlitch.setFx(OFXPOSTGLITCH_TWIST, true);
                     }
                     */
-                    string opt = m.getArgAsString(i+2);
-                    if(opt == "u" || opt == "i"){
-                        objs[4]->setParam(7, 1);
+                }
+                
+                if(instlMsg == "scratch"){
+                    if(!toggleGlitch) {
+                        toggleGlitch = true;
+                        //myGlitch.setFx(OFXPOSTGLITCH_CUTSLIDER, true);
+                        myGlitch.setFx(OFXPOSTGLITCH_TWIST, true);
                     }
                 }
                 if(instlMsg == "u"){
@@ -98,6 +114,7 @@ void ofApp::update(){
                     objs[4]->setParam(7, 1);
                 }
                 if(instlMsg == "808"){
+                    vectorFieldShow = true;
                     objs[3]->setParam(6, 1);
                 }
             }
@@ -108,13 +125,22 @@ void ofApp::update(){
         objs[i]->update(dt.get());
         if(toggleGlitch){
             frameCounter++;
-            if(frameCounter > 10){
+            if(frameCounter > 30){
                 toggleGlitch = false;
                 //myGlitch.setFx(OFXPOSTGLITCH_CUTSLIDER, false);
                 myGlitch.setFx(OFXPOSTGLITCH_TWIST, false);
                 frameCounter = 0;
             }
         }
+        if(toggleNoise){
+            frameCounter2++;
+            if(frameCounter2 > 40){
+                toggleNoise = false;
+                myGlitch.setFx(OFXPOSTGLITCH_NOISE, false);
+                frameCounter2 = 0;
+            }
+        }
+        
     }
     
 }

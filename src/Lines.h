@@ -33,6 +33,9 @@ public:
         
         if(toggleDisplay2){
             ofNoFill();
+            glLineWidth(2.0);
+            ofPushMatrix();
+            ofRotateY(180);
             ofSetColor(ofRandom(256),255,255,100);
             ofBeginShape();
             ofVertex(leftTop2.x, leftTop2.y);
@@ -41,6 +44,7 @@ public:
             ofVertex(leftTop2.x - 50, leftTop2.y - 70);
             ofVertex(leftTop2.x, leftTop2.y);
             ofEndShape();
+            ofPopMatrix();
             //ofDrawRectangle(leftTop, 0, 50, ofGetHeight());
             frameCounter2++;
             if(frameCounter2 > 3){
