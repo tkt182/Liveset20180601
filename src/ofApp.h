@@ -6,6 +6,8 @@
 #include "Lines.h"
 #include "VectorField.h"
 #include "RectLines.h"
+#include "Sector.h"
+#include "ParticleLines.h"
 #include "ofxOsc.h"
 #include "ofxPostGlitch.h"
 

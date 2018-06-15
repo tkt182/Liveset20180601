@@ -44,10 +44,10 @@ public:
         for (int i = 0; i < lines.size(); i++){
             
             int z = i * 25;
-            for(int line = 0; line < 180; line++){
+            for(int line = 0; line < 180; line += 1){
                 
                 ofPoint p1 = this->make_rect_point(len, ofGetFrameNum() + z + line, z - len * 0.5);
-                ofPoint p2 = this->make_rect_point(len, ofGetFrameNum() + z + line + 1, z - len * 0.5);
+                ofPoint p2 = this->make_rect_point(len, ofGetFrameNum() + z + line + 15, z - len * 0.5);
                 
                 //ofSetColor(239, ofMap(line, 0, 120, 0, 255));
                 ofSetColor(239, ofMap(line / 2, 0, 120, 0, 255));

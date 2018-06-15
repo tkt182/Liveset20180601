@@ -301,6 +301,8 @@
 		F7D2102660E69CDA6D15B64A /* ofxBox2d.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxBox2d.h; path = ../../../addons/ofxBox2d/src/ofxBox2d.h; sourceTree = SOURCE_ROOT; };
 		F7FBC56859535E597B24BB91 /* NetworkingUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = NetworkingUtils.h; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h; sourceTree = SOURCE_ROOT; };
 		F8F091EA20CFF4E5003B2FF2 /* RectLines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RectLines.h; sourceTree = "<group>"; };
+		F8F091EB20D1442E003B2FF2 /* Sector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sector.h; sourceTree = "<group>"; };
+		F8F091EC20D18942003B2FF2 /* ParticleLines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleLines.h; sourceTree = "<group>"; };
 		FA784162B6A8E3A77BBE4D6C /* b2TimeStep.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2TimeStep.h; path = ../../../addons/ofxBox2d/libs/Box2D/Dynamics/b2TimeStep.h; sourceTree = SOURCE_ROOT; };
 		FD20B1FFE795860DB1C68BF2 /* b2ChainAndCircleContact.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2ChainAndCircleContact.cpp; path = ../../../addons/ofxBox2d/libs/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -684,6 +686,8 @@
 				E12912877CF4417076821584 /* PingPongBuffer.h */,
 				07044944C6F7D5B91CD7E856 /* VectorField.h */,
 				F8F091EA20CFF4E5003B2FF2 /* RectLines.h */,
+				F8F091EB20D1442E003B2FF2 /* Sector.h */,
+				F8F091EC20D18942003B2FF2 /* ParticleLines.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

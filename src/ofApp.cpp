@@ -39,6 +39,15 @@ void ofApp::setup(){
     shared_ptr<ObjBase> o4(new RectLines());
     o4->setup();
     objs.push_back(o4);
+    
+    shared_ptr<ObjBase> o5(new Sector());
+    o5->setup();
+    objs.push_back(o5);
+    
+    shared_ptr<ObjBase> o6(new ParticleLines());
+    o6->setup();
+    objs.push_back(o6);
+    
 }
 
 //--------------------------------------------------------------
@@ -146,6 +155,9 @@ void ofApp::keyPressed(int key){
     }
     if(key == 'h'){
         objs[4]->setParam(7, 1);
+    }
+    if(key == 'j'){
+        objs[6]->setParam(8, 1);
     }
     
     
