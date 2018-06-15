@@ -75,7 +75,8 @@ void ofApp::update(){
                     objs[2]->setParam(4, 1);
                 }
                 if(instlMsg == "jazz"){
-                    objs[2]->setParam(5, 1);
+                    //objs[2]->setParam(5, 1);
+                    objs[6]->setParam(8, 1);
                 }
                 if(instlMsg == "glitch"){
                     /*
@@ -166,7 +167,7 @@ void ofApp::keyPressed(int key){
         objs[6]->setParam(8, 1);
     }
     if(key == 'z'){
-        vectorFieldShow = !vectorFieldShow;        
+        vectorFieldShow = !vectorFieldShow;
     }
     
     

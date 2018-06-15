@@ -26,7 +26,7 @@ public:
     
     void draw(bool isShow){
         
-        glLineWidth(10.0);
+        glLineWidth(3.0);
         for (int i = 0; i < lines.size(); i++){
             if(lines[i]->life < 0) {
                 lines.erase(lines.begin() + i);

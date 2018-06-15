@@ -7,22 +7,21 @@ class ParticleLine {
 public:
     ParticleLine(){
         particleNum = 25;
-        center = ofPoint(ofRandom(-ofGetWidth()/2 * 0.6, ofGetWidth()/2 * 0.6), ofRandom(-ofGetHeight()/2 * 0.6, ofGetHeight()/2 * 0.6));
-        for(int i = 0; i < particleNum; i++){
-            ofPoint point = ofPoint(ofRandom(center.x - ofGetWidth()/14, center.x + ofGetWidth()/14), ofRandom(center.y - ofGetHeight()/14, center.y + ofGetHeight()/14));
-            particlePoints.push_back(ofVec3f(point.x, point.y, 0.0));
-            mesh.addVertex(ofVec3f(point.x, point.y, 0.0));
         
+        float harfx = ofGetWidth()/2;
+        float harfy = ofGetHeight()/2;
+        center = ofPoint(ofRandom(-harfx * 0.6, harfx * 0.6), ofRandom(-harfy * 0.6, harfy * 0.6));
+        for(int i = 0; i < particleNum; i++){
+            ofPoint point = ofPoint(ofRandom(center.x - harfx/7.0, center.x + harfx/7.0), ofRandom(center.y - harfy/7.0, center.y + harfy/7.0));
+            particlePoints.push_back(ofVec3f(point.x, point.y, 0.0));
             velocity.push_back(ofVec2f(ofRandom(-1.0, 1.0), ofRandom(-1.0, 1.0)));
         
         }
         life = 10;
         vxRotate = ofRandom(-0.7, 0.7);
         vyRotate = ofRandom(-0.7, 0.7);
-        vzRotate = ofRandom(-0.7, 0.7);
         xRotate  = 0.0;
         yRotate  = 0.0;
-        zRotate  = 0.0;
         scale = ofRandom(1.0, 1.5);
     }
     ~ParticleLine(){
@@ -113,6 +112,9 @@ public:
     }
     
     void setParam(int ch, float val){
+        if(pls.size() > 10){
+            return;
+        }
         if(ch == 8){
             pls.push_back(new ParticleLine());
         }
