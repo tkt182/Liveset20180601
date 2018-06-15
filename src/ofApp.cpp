@@ -10,13 +10,13 @@ void ofApp::setup(){
     myGlitch.toggleFx(OFXPOSTGLITCH_GLOW);
     toggleGlitch = false;
     toggleNoise = false;
+    toggleShaker = false;
     frameCounter = 0;
     frameCounter2 = 0;
+    frameCounter3 = 0;
     
     ofSetFrameRate(30);
     ofBackground(0);
-    //ofSetWindowTitle("Insta");
-    //ofBackground(0);
     
     receiver.setup(PORT);
     //ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ADD);
@@ -88,8 +88,10 @@ void ofApp::update(){
                     float opt2 = m.getArgAsFloat(3);
                     cout << "hoge : " << opt2 << endl;
                     if(opt2 == 2.0 || opt2 == 6.0 || opt2 == 7.0){
-                        toggleNoise = true;
-                        myGlitch.setFx(OFXPOSTGLITCH_NOISE, true);
+                        if(!toggleNoise){
+                            toggleNoise = true;
+                            myGlitch.setFx(OFXPOSTGLITCH_NOISE, true);
+                        }
                     }
                     /*
                     if(!toggleGlitch) {
@@ -116,6 +118,14 @@ void ofApp::update(){
                 if(instlMsg == "808"){
                     vectorFieldShow = true;
                     objs[3]->setParam(6, 1);
+                    string opt  = m.getArgAsString(i+1);
+                    float opt2 = m.getArgAsFloat(i+2);
+                    if(opt == "speed" && opt2 == -1) {
+                        if(!toggleShaker){
+                            toggleShaker = true;
+                            myGlitch.setFx(OFXPOSTGLITCH_SHAKER, true);
+                        }
+                    }
                 }
             }
         }
@@ -138,6 +148,15 @@ void ofApp::update(){
                 toggleNoise = false;
                 myGlitch.setFx(OFXPOSTGLITCH_NOISE, false);
                 frameCounter2 = 0;
+            }
+        }
+        
+        if(toggleShaker){
+            frameCounter3++;
+            if(frameCounter3 > 30){
+                toggleShaker = false;
+                myGlitch.setFx(OFXPOSTGLITCH_SHAKER, false);
+                frameCounter3 = 0;
             }
         }
         

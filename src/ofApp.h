@@ -43,8 +43,8 @@ private:
     
     ofFbo          finalFbo;
     ofxPostGlitch  myGlitch;
-    bool toggleGlitch, toggleNoise;
+    bool toggleGlitch, toggleNoise, toggleShaker;
     bool vectorFieldShow;
-    int frameCounter, frameCounter2;
+    int frameCounter, frameCounter2, frameCounter3;
 
 };
