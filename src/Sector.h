@@ -13,6 +13,8 @@ public:
     }
     
     void draw(bool isShow){
+        return;
+        
         ofTranslate(ofGetWidth() * 0.5, ofGetHeight() * 0.5);
         
         int x_index = 0;

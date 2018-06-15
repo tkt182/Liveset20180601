@@ -9,7 +9,7 @@ public:
         particleNum = 25;
         center = ofPoint(ofRandom(-ofGetWidth()/2 * 0.6, ofGetWidth()/2 * 0.6), ofRandom(-ofGetHeight()/2 * 0.6, ofGetHeight()/2 * 0.6));
         for(int i = 0; i < particleNum; i++){
-            ofPoint point = ofPoint(ofRandom(center.x - ofGetWidth()/20, center.x + ofGetWidth()/20), ofRandom(center.y - ofGetHeight()/20, center.y + ofGetHeight()/20));
+            ofPoint point = ofPoint(ofRandom(center.x - ofGetWidth()/14, center.x + ofGetWidth()/14), ofRandom(center.y - ofGetHeight()/14, center.y + ofGetHeight()/14));
             particlePoints.push_back(ofVec3f(point.x, point.y, 0.0));
             mesh.addVertex(ofVec3f(point.x, point.y, 0.0));
         
@@ -17,9 +17,9 @@ public:
         
         }
         life = 10;
-        vxRotate = ofRandom(-1.0, 1.0);
-        vyRotate = ofRandom(-1.0, 1.0);
-        vzRotate = ofRandom(-1.0, 1.0);
+        vxRotate = ofRandom(-0.7, 0.7);
+        vyRotate = ofRandom(-0.7, 0.7);
+        vzRotate = ofRandom(-0.7, 0.7);
         xRotate  = 0.0;
         yRotate  = 0.0;
         zRotate  = 0.0;
@@ -38,13 +38,14 @@ public:
     
     void draw(){
         
-        ofSetColor(128, 155, 255, 128);
+        ofSetColor(150, 200, 255, 200);
         glLineWidth(3.0);
         ofPushMatrix();
+        ofTranslate(ofGetWidth() * 0.5, ofGetHeight() * 0.5);
         ofScale(scale,scale,scale);
         ofRotateX(xRotate);
         ofRotateY(yRotate);
-        ofRotateZ(zRotate);
+        //ofRotateZ(zRotate);
         
         
         for(int i = 0; i < particleNum - 2; i++){
@@ -70,7 +71,7 @@ public:
         ofPopMatrix();
         xRotate += vxRotate;
         yRotate += vyRotate;
-        zRotate += vzRotate;
+        //zRotate += vzRotate;
     }
     
     int particleNum;

@@ -34,6 +34,7 @@ void ofApp::setup(){
     
     shared_ptr<ObjBase> o3(new VectorField());
     o3->setup();
+    o3->setParam(6, 1);
     objs.push_back(o3);
     
     shared_ptr<ObjBase> o4(new RectLines());
