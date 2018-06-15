@@ -49,6 +49,8 @@ void ofApp::setup(){
     o6->setup();
     objs.push_back(o6);
     
+    vectorFieldShow = false;
+    
 }
 
 //--------------------------------------------------------------
@@ -94,7 +96,6 @@ void ofApp::update(){
                 if(instlMsg == "i"){
                     objs[4]->setParam(7, 1);
                 }
-                
                 if(instlMsg == "808"){
                     objs[3]->setParam(6, 1);
                 }
@@ -124,9 +125,13 @@ void ofApp::draw(){
     ofClear(0, 0, 0);
     
     for(int i = 0; i < objs.size(); i++){
+        if(i == 3) continue;
         objs[i]->draw(true);
     }
-    objs[3]->draw(true);
+    // looks good two times draw
+    objs[3]->draw(vectorFieldShow);
+    objs[3]->draw(vectorFieldShow);
+    
     finalFbo.end();
     
     /* Apply effects */
@@ -159,6 +164,9 @@ void ofApp::keyPressed(int key){
     }
     if(key == 'j'){
         objs[6]->setParam(8, 1);
+    }
+    if(key == 'z'){
+        vectorFieldShow = !vectorFieldShow;        
     }
     
     

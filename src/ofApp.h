@@ -44,6 +44,7 @@ private:
     ofFbo          finalFbo;
     ofxPostGlitch  myGlitch;
     bool toggleGlitch;
+    bool vectorFieldShow;
     int frameCounter;
 
 };

@@ -83,6 +83,7 @@ public:
     }
     
     void draw(bool isShow){
+        if (!isShow) return;
         
         ofSetColor(255);
         cam.begin();
