@@ -15,7 +15,10 @@ public:
         ofSetColor(31,127,255,100);
         ofDrawCircle(0, 0, radius);
         ofSetColor(31,127,255,200);
-        ofDrawCircle(0, 0, radius*0.3);
+        ofDrawCircle(0, 0, radius*0.7);
+        ofSetColor(127,200,255,200);
+        ofDrawCircle(0, 0, radius*0.4*sin(ofGetElapsedTimef()));
+        
         glPopMatrix();
     }
 

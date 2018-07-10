@@ -8,8 +8,7 @@
 #include "CustomRect.h"
 #include "ConnectLines.h"
 
-class PhysicalObjs : public ObjBase {
-public:
+
     void setup(){
         box2d.init();
         box2d.setGravity(0, 10);
@@ -44,14 +43,19 @@ public:
         circle.draw();
         rect.draw();
         
-        lines.draw();
+        //lines.draw();
     }
 
-    void setParam(int ch, float val){
+    
         if(ch == 1){
             // this case, do not use val
-            ofVec2f velocity = ofVec2f(ofRandom(-1.0, 1.0), ofRandom(-1.0, 1.0)).normalize();
+            //ofVec2f velocity = ofVec2f(ofRandom(-1.0, 1.0), ofRandom(-1.0, 1.0)).normalize();
+            ofVec2f velocity = ofVec2f(ofRandom(-1.0, 1.0), -1.0).normalize();
             circle.addForce(velocity, 5000.0);
+        }
+        if(ch == 2){
+            ofVec2f velocity = ofVec2f(ofRandom(-1.0, 1.0), -1.0).normalize();
+            rect.addForce(velocity, 5000.0);
         }
 
     };

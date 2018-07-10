@@ -19,6 +19,21 @@ void ofApp::update(){
         ofxOscMessage m;
         receiver.getNextMessage(m);
     
+        cout << m.getAddress() << endl;
+        for(int i = 0; i < m.getNumArgs(); i++){
+            cout << m.getArgAsString(i) << endl;
+            if(m.getArgType(i) == OFXOSC_TYPE_STRING){
+                string instlMsg = m.getArgAsString(i);
+                if(instlMsg == "hand"){
+                    objs[0]->setParam(1, ofRandom(0.0, 1.0));
+                }
+                if(instlMsg == "808bd"){
+                    objs[0]->setParam(2, ofRandom(0.0, 1.0));
+                }
+            }
+        }
+        
+        /*
         if(m.getAddress() == "/sound/instl"){
             instlMsg = m.getArgAsString(0);
             
@@ -26,6 +41,7 @@ void ofApp::update(){
                 objs[0]->setParam(1, ofRandom(-1.0, 1.0));
             }
         }
+        */
     }
     
     
