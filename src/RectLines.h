@@ -33,7 +33,7 @@ public:
             }
         }
         
-        float len = 360;
+        float len = 240;
         
         cam.begin();
         ofRotateX(120);

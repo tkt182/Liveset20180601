@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    //ofHideCursor();
+    ofHideCursor();
     ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ADD);
     finalFbo.allocate(ofGetWidth(), ofGetHeight());
     myGlitch.setup(&finalFbo);
@@ -86,7 +86,7 @@ void ofApp::update(){
                         objs[4]->setParam(7, 1);
                     }
                     float opt2 = m.getArgAsFloat(3);
-                    cout << "hoge : " << opt2 << endl;
+                    //cout << "hoge : " << opt2 << endl;
                     if(opt2 == 2.0 || opt2 == 6.0 || opt2 == 7.0){
                         if(!toggleNoise){
                             toggleNoise = true;
@@ -227,7 +227,7 @@ void ofApp::keyPressed(int key){
     if (key == 'o') myGlitch.toggleFx(OFXPOSTGLITCH_SWELL);
     //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_INVERT);
     //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_CR_RLINE);
-    if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_CR_MIRROR4);
+    //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_CR_MIRROR4);
 }
 
 //--------------------------------------------------------------
