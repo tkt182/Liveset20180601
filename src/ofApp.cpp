@@ -51,6 +51,10 @@ void ofApp::setup(){
     o6->setup();
     objs.push_back(o6);
     
+    shared_ptr<ObjBase> o7(new WalkThrough());
+    o7->setup();
+    objs.push_back(o7);
+    
     vectorFieldShow = false;
     
 }

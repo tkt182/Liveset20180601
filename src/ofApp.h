@@ -8,6 +8,7 @@
 #include "RectLines.h"
 #include "Sector.h"
 #include "ParticleLines.h"
+#include "WalkThrough.h"
 #include "ofxOsc.h"
 #include "ofxPostGlitch.h"
 

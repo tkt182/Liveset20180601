@@ -1,4 +1,7 @@
+ofxAnimatable
 ofxBox2d
+ofxGLFog
 ofxGui
 ofxOsc
 ofxPostGlitch
+ofxTrackingCamera
