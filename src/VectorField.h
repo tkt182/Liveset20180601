@@ -46,7 +46,7 @@ public:
                 mesh.addVertex(ofVec3f(x, y));
                 mesh.addTexCoord(ofVec2f(x, y));
                 //mesh.addColor(ofFloatColor(0.8, 0.6, 1.0, 0.5));
-                mesh.addColor(ofFloatColor(0.6, 0.8, 1.0, 0.5));
+                mesh.addColor(ofFloatColor(0.8, 0.0, 0.5, 0.5));
             }
         }
         

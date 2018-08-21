@@ -154,6 +154,7 @@ public:
     }
     
     void draw(bool isShow){
+        if(!isShow) return;
         ofEnableBlendMode(OF_BLENDMODE_ALPHA);
         //ofEnableDepthTest();
         trackingCamera.begin();

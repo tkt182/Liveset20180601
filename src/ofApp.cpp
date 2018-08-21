@@ -14,6 +14,30 @@ void ofApp::setup(){
     frameCounter = 0;
     frameCounter2 = 0;
     frameCounter3 = 0;
+    stoggleGlitch = false;
+    sframeCounter = 0;
+    
+    
+    plotHeight = 128;
+    bufferSize = 2048;
+    
+    fft.setup();
+    
+    /*
+    fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING);
+    
+    drawBins.resize(fft->getBinSize());
+    middleBins.resize(fft->getBinSize());
+    audioBins.resize(fft->getBinSize());
+    */
+    
+    ofSoundStreamSetup(0, 1, this, 44100, bufferSize, 4);
+    
+    decayRate = 0.05;
+    minimumThreshold = 0.1;
+    threshold = minimumThreshold;
+    rms_flag = false;
+    
     
     ofSetFrameRate(30);
     ofBackground(0);
@@ -56,6 +80,7 @@ void ofApp::setup(){
     objs.push_back(o7);
     
     vectorFieldShow = false;
+    walkThroughShow = false;
     
 }
 
@@ -163,9 +188,37 @@ void ofApp::update(){
                 frameCounter3 = 0;
             }
         }
-        
     }
     
+    fft.update();
+    //float value = fft.getUnScaledLoudestValue();
+    float value = fft.getLowVal();
+    cout << value << endl;
+    //cout << fft.getUnScaledLoudestValue() << endl;
+    if(value > 12.) {
+        rms_flag = true;
+        cout << "TRUE" << endl;
+    }else{
+        rms_flag = false;
+    }
+    
+    //if(threshold > 0.2){
+    if(rms_flag){
+        cout << "EFFECT ON" << endl;
+        stoggleGlitch = true;
+        myGlitch.setFx(OFXPOSTGLITCH_TWIST, true);
+    }
+    
+    cout << "S FRAME COUNTER " << sframeCounter << endl;
+    // sound glitch
+    if(stoggleGlitch){
+        sframeCounter++;
+        if(sframeCounter > 10){
+            stoggleGlitch = false;
+            myGlitch.setFx(OFXPOSTGLITCH_TWIST, false);
+            sframeCounter = 0;
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -175,12 +228,13 @@ void ofApp::draw(){
     ofClear(0, 0, 0);
     
     for(int i = 0; i < objs.size(); i++){
-        if(i == 3) continue;
+        if(i == 3 || i == 7) continue;
         objs[i]->draw(true);
     }
     // looks good two times draw
     objs[3]->draw(vectorFieldShow);
     objs[3]->draw(vectorFieldShow);
+    objs[7]->draw(walkThroughShow);
     
     finalFbo.end();
     
@@ -189,20 +243,66 @@ void ofApp::draw(){
     
     /* draw effected view */
     finalFbo.draw(0, 0);
+    
+    
+    /*
+    ofSetColor(255);
+    ofPushMatrix();
+    ofTranslate(16, 16);
+    
+    soundMutex.lock();
+    drawBins = middleBins;
+    soundMutex.unlock();
+    
+    ofDrawBitmapString("Frequency Domain", 0, 0);
+    plot(drawBins, -plotHeight, plotHeight / 2);
+    ofPopMatrix();
+    string msg = ofToString((int) ofGetFrameRate()) + " fps";
+    ofDrawBitmapString(msg, ofGetWidth() - 80, ofGetHeight() - 20);
+    */
+    
+    /*
+    fft.drawBars();
+    fft.drawDebug();
+    
+    ofNoFill();
+    ofDrawRectangle(824, 0, 200, 200);
+    ofDrawRectangle(824, 200, 200, 200);
+    ofDrawRectangle(824, 400, 200, 200);
+    ofDrawRectangle(824, 600, 200, 200);
+    
+    fft.drawHistoryGraph(ofPoint(824,0), LOW);
+    fft.drawHistoryGraph(ofPoint(824,200),MID );
+    fft.drawHistoryGraph(ofPoint(824,400),HIGH );
+    fft.drawHistoryGraph(ofPoint(824,600),MAXSOUND );
+    ofDrawBitmapString("LOW",850,20);
+    ofDrawBitmapString("HIGH",850,420);
+    ofDrawBitmapString("MID",850,220);
+    ofDrawBitmapString("MAX VOLUME",850,620);
+    
+    ofSetColor(0);
+    ofDrawBitmapString("Press 'r' or 'q' to toggle normalization of values", 20,320);
+    */
+    
+
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
+    /*
     if(key == 'a'){
         objs[0]->setParam(1, 1);
     }
+    */
     if(key == 's'){
         objs[1]->setParam(2, 1);
     }
+    /*
     if(key == 'd'){
         objs[2]->setParam(4, 1);
     }
+    */
     if(key == 'f'){
         objs[2]->setParam(5, 1);
     }
@@ -218,6 +318,9 @@ void ofApp::keyPressed(int key){
     if(key == 'z'){
         vectorFieldShow = !vectorFieldShow;
     }
+    if(key == 'x'){
+        walkThroughShow = !walkThroughShow;
+    }
     
     
     if (key == 'q') myGlitch.toggleFx(OFXPOSTGLITCH_CONVERGENCE);
@@ -232,7 +335,100 @@ void ofApp::keyPressed(int key){
     //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_INVERT);
     //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_CR_RLINE);
     //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_CR_MIRROR4);
+
+    
+    /*
+    if(key=='1'){
+        fft.setVolumeRange(100);
+        fft.setNormalize(false);
+    }
+    if(key=='2'){
+        fft.setNormalize(true);
+    }
+    */
+
 }
+
+void ofApp::plot(vector<float>& buffer, float scale, float offset) {
+    ofNoFill();
+    int n = buffer.size();
+    ofDrawRectangle(0, 0, n, plotHeight);
+    glPushMatrix();
+    glTranslatef(0, plotHeight / 2 + offset, 0);
+    ofBeginShape();
+    for (int i = 0; i < n; i++) {
+        ofVertex(i, sqrt(buffer[i]) * scale);
+    }
+    ofEndShape();
+    glPopMatrix();
+}
+
+void ofApp::audioReceived(float* input, int bufferSize, int nChannels) {
+    /*
+    float maxValue = 0;
+    for(int i = 0; i < bufferSize; i++) {
+        if(abs(input[i]) > maxValue) {
+            maxValue = abs(input[i]);
+        }
+    }
+    for(int i = 0; i < bufferSize; i++) {
+        input[i] /= maxValue;
+    }
+    
+    fft->setSignal(input);
+    
+    float* curFft = fft->getAmplitude();
+    memcpy(&audioBins[0], curFft, sizeof(float) * fft->getBinSize());
+    
+    maxValue = 0;
+    for(int i = 0; i < fft->getBinSize(); i++) {
+        if(abs(audioBins[i]) > maxValue) {
+            maxValue = abs(audioBins[i]);
+        }
+    }
+    for(int i = 0; i < fft->getBinSize(); i++) {
+        audioBins[i] /= maxValue;
+    }
+    cout << maxValue << endl;
+    
+    soundMutex.lock();
+    middleBins = audioBins;
+    soundMutex.unlock();
+    
+    
+    // modified from audioInputExample
+    float rms = 0.0;
+    int numCounted = 0;
+    
+    for (int i = 0; i < bufferSize / 2; i++){
+        float leftSample = input[i * 2] * 0.5;
+        float rightSample = input[i * 2 + 1] * 0.5;
+        
+        rms += leftSample * leftSample;
+        rms += rightSample * rightSample;
+        numCounted += 2;
+    }
+    
+    rms /= (float)numCounted;
+    rms = sqrt(rms);
+    // rms is now calculated
+    
+    threshold = ofLerp(threshold, minimumThreshold, decayRate);
+    
+    if(rms > threshold) {
+        // onset detected!
+        threshold = rms;
+    }
+    
+    //cout << threshold << endl;
+    if(maxValue > 0.48){
+        rms_flag = true;
+    }else{
+        rms_flag = false;
+    }
+    */
+}
+
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){

@@ -11,6 +11,8 @@
 #include "WalkThrough.h"
 #include "ofxOsc.h"
 #include "ofxPostGlitch.h"
+#include "ofxFft.h"
+#include "ofxProcessFFT.h"
 
 #define PORT 60000
 
@@ -32,6 +34,11 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
+    
+    void plot(vector<float>& buffer, float scale, float offset);
+    void audioReceived(float* input, int bufferSize, int nChannels);
+    
+    
 
 private:
     vector<shared_ptr<ObjBase>> objs;
@@ -45,7 +52,22 @@ private:
     ofFbo          finalFbo;
     ofxPostGlitch  myGlitch;
     bool toggleGlitch, toggleNoise, toggleShaker;
-    bool vectorFieldShow;
+    bool stoggleGlitch;
+    bool vectorFieldShow, walkThroughShow;
     int frameCounter, frameCounter2, frameCounter3;
+    int sframeCounter;
 
+    int plotHeight, bufferSize;
+    
+    //ofxFft* fft;
+    ProcessFFT fft;
+    
+    ofMutex soundMutex;
+    vector<float> drawBins, middleBins, audioBins;
+    bool rms_flag;
+    float threshold;
+    float minimumThreshold;
+    float decayRate;
+    
+    
 };

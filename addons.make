@@ -1,5 +1,6 @@
 ofxAnimatable
 ofxBox2d
+ofxFft
 ofxGLFog
 ofxGui
 ofxOsc

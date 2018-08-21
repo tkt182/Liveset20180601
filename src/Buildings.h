@@ -13,7 +13,8 @@ public:
     void draw() {
         
         //ofSetColor(0.6, 0.8, 1.0, 50);
-        ofSetColor(150, 200, 255, 7);
+        //ofSetColor(150, 200, 255, 7);
+        ofSetColor(200, 0, 128, 7);
         //ofFill();
         //mesh.drawElements( GL_TRIANGLES, is.size());
         
