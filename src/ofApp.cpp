@@ -332,6 +332,7 @@ void ofApp::keyPressed(int key){
     if (key == 'u') myGlitch.toggleFx(OFXPOSTGLITCH_NOISE);
     if (key == 'i') myGlitch.toggleFx(OFXPOSTGLITCH_SLITSCAN);
     if (key == 'o') myGlitch.toggleFx(OFXPOSTGLITCH_SWELL);
+    if (key == 'l') myGlitch.toggleFx(OFXPOSTGLITCH_SHAKE_CUT_SLIDER);
     //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_INVERT);
     //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_CR_RLINE);
     //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_CR_MIRROR4);
