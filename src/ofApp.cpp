@@ -193,29 +193,29 @@ void ofApp::update(){
     fft.update();
     //float value = fft.getUnScaledLoudestValue();
     float value = fft.getLowVal();
-    cout << value << endl;
+    //cout << value << endl;
     //cout << fft.getUnScaledLoudestValue() << endl;
     if(value > 12.) {
         rms_flag = true;
-        cout << "TRUE" << endl;
+        //cout << "TRUE" << endl;
     }else{
         rms_flag = false;
     }
     
     //if(threshold > 0.2){
     if(rms_flag){
-        cout << "EFFECT ON" << endl;
+        //cout << "EFFECT ON" << endl;
         stoggleGlitch = true;
-        myGlitch.setFx(OFXPOSTGLITCH_TWIST, true);
+        myGlitch.setFx(OFXPOSTGLITCH_CUTSLIDER, true);
     }
     
-    cout << "S FRAME COUNTER " << sframeCounter << endl;
+    //cout << "S FRAME COUNTER " << sframeCounter << endl;
     // sound glitch
     if(stoggleGlitch){
         sframeCounter++;
         if(sframeCounter > 10){
             stoggleGlitch = false;
-            myGlitch.setFx(OFXPOSTGLITCH_TWIST, false);
+            myGlitch.setFx(OFXPOSTGLITCH_CUTSLIDER, false);
             sframeCounter = 0;
         }
     }
@@ -295,7 +295,7 @@ void ofApp::keyPressed(int key){
         objs[0]->setParam(1, 1);
     }
     */
-    if(key == 's'){
+    if(key == 'b'){
         objs[1]->setParam(2, 1);
     }
     /*
@@ -306,13 +306,13 @@ void ofApp::keyPressed(int key){
     if(key == 'f'){
         objs[2]->setParam(5, 1);
     }
-    if(key == 'g'){
+    if(key == 'a'){
         objs[3]->setParam(6, 1);
     }
-    if(key == 'h'){
+    if(key == 'v'){
         objs[4]->setParam(7, 1);
     }
-    if(key == 'j'){
+    if(key == 'c'){
         objs[6]->setParam(8, 1);
     }
     if(key == 'z'){
@@ -323,16 +323,18 @@ void ofApp::keyPressed(int key){
     }
     
     
-    if (key == 'q') myGlitch.toggleFx(OFXPOSTGLITCH_CONVERGENCE);
+    //if (key == 'q') myGlitch.toggleFx(OFXPOSTGLITCH_CONVERGENCE);
     //if (key == 'w') myGlitch.toggleFx(OFXPOSTGLITCH_GLOW);
-    if (key == 'e') myGlitch.toggleFx(OFXPOSTGLITCH_SHAKER);
-    if (key == 'r') myGlitch.toggleFx(OFXPOSTGLITCH_CUTSLIDER);
-    if (key == 't') myGlitch.toggleFx(OFXPOSTGLITCH_TWIST);
-    if (key == 'y') myGlitch.toggleFx(OFXPOSTGLITCH_OUTLINE);
-    if (key == 'u') myGlitch.toggleFx(OFXPOSTGLITCH_NOISE);
-    if (key == 'i') myGlitch.toggleFx(OFXPOSTGLITCH_SLITSCAN);
-    if (key == 'o') myGlitch.toggleFx(OFXPOSTGLITCH_SWELL);
-    if (key == 'l') myGlitch.toggleFx(OFXPOSTGLITCH_SHAKE_CUT_SLIDER);
+    if (key == '4') myGlitch.toggleFx(OFXPOSTGLITCH_SHAKER);
+    if (key == '5') myGlitch.toggleFx(OFXPOSTGLITCH_CUTSLIDER);
+    if (key == '0') myGlitch.toggleFx(OFXPOSTGLITCH_TWIST);
+    if (key == '6') myGlitch.toggleFx(OFXPOSTGLITCH_OUTLINE);
+    if (key == '7') myGlitch.toggleFx(OFXPOSTGLITCH_NOISE);
+    if (key == '8') myGlitch.toggleFx(OFXPOSTGLITCH_SLITSCAN);
+    //if (key == 'o') myGlitch.toggleFx(OFXPOSTGLITCH_SWELL);
+    if (key == '1') myGlitch.toggleFx(OFXPOSTGLITCH_SHAKE_CUT_SLIDER);
+    if (key == '2') myGlitch.toggleFx(OFXPOSTGLITCH_COLOR_SLIDER);
+    if (key == '3') myGlitch.toggleFx(OFXPOSTGLITCH_MIRROR4);
     //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_INVERT);
     //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_CR_RLINE);
     //if (key == 'p') myGlitch.toggleFx(OFXPOSTGLITCH_CR_MIRROR4);

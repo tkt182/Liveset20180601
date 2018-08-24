@@ -37,7 +37,7 @@ public:
     
     void draw(){
         
-        ofSetColor(150, 200, 255, 200);
+        ofSetColor(200, 0.8, 128, 200);
         glLineWidth(3.0);
         ofPushMatrix();
         ofTranslate(ofGetWidth() * 0.5, ofGetHeight() * 0.5);
